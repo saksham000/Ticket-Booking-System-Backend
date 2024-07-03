@@ -1,4 +1,4 @@
-package com.ticket.bookingsystem.movies;
+package com.ticket.bookingsystem.movies.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
+
+import com.ticket.bookingsystem.movies.databasefiles.Movie;
 
 @Service
 public class MoviesDaoService {
