@@ -3,6 +3,7 @@ package com.ticket.bookingsystem.movies.service;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,11 @@ public class ShowDaoService {
             }
         }
         return movieShows;
+    }
+
+    public void deleteShow(int showid){
+        Predicate<? super Show> predicate = show -> show.getShowId().equals(showid);
+        shows.removeIf(predicate);
     }
 
 }
