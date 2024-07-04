@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-
 import org.springframework.stereotype.Service;
-
 import com.ticket.bookingsystem.movies.databasefiles.Movie;
 
 @Service
@@ -27,7 +25,7 @@ public class MoviesDaoService {
     public List<Movie> findMovieByName(String movieName, String city ){
         Predicate<Movie> predicate = movie -> movie.getMovieName().equalsIgnoreCase(movieName);
         Predicate<Movie> predicate2 = movie -> movie.getCity().equalsIgnoreCase(city);
-        Predicate<Movie> combined = predicate.and(predicate2);    
+        Predicate<Movie> combined = predicate.and(predicate2);
         return movies.stream().filter(combined).toList();
     }
 
