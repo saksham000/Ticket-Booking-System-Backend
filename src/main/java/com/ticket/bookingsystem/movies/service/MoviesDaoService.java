@@ -13,7 +13,7 @@ import com.ticket.bookingsystem.movies.databasefiles.Movie;
 public class MoviesDaoService {
 
     private static List<Movie> movies = new ArrayList<>();
-    private static int movieId = 0;
+    private static int movieId = 1;
 
     static {
 

@@ -19,17 +19,17 @@ public class MoviesController {
         this.movieService = movieService;
     }
 
-    @GetMapping(path = "listmovies")
+    @GetMapping(path = "movies")
     public List<Movie> listAllMovies() {
         return movieService.listAllMovies();
     }
 
-    @GetMapping(path = "findmovies/{movieName}/{city}")
+    @GetMapping(path = "movies/{movieName}/{city}")
     public List<Movie> findMovieByName(@PathVariable String movieName, @PathVariable String city) {
         return movieService.findMovieByName(movieName, city);
     }
 
-    @PostMapping(path = "addmovies")
+    @PostMapping(path = "movies")
     public Movie addMovie(@RequestBody Movie movie) {
         Movie addMovie = movieService.addNewMovie(movie.getMovieName(), movie.getDate(), movie.getCity(),
                 movie.getTheatreName());

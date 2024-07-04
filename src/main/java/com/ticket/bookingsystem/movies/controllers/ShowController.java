@@ -24,7 +24,7 @@ public class ShowController {
     }
 
     @PostMapping(path = "shows")
-    public List<Show> addShow(@RequestBody Show show) {
+    public List<Show> addShowToSpecificMovie(@RequestBody Show show) {
        return showService.addShow(show);
     }
 
