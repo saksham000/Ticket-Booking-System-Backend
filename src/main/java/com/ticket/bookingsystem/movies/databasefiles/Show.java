@@ -52,7 +52,8 @@ public class Show {
     }
 
     public Seat getSeat(int seatNumber) {
-        return seats.stream().filter(seats -> seats.getSeatNo() == seatNumber).findFirst().orElse(null);
+        return seats.stream().filter(seats -> seats.getSeatNo() == seatNumber).findFirst()
+        .orElse(null);
     }
 
     // toString method

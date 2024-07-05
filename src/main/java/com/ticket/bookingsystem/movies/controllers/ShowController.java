@@ -1,7 +1,7 @@
 package com.ticket.bookingsystem.movies.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.ticket.bookingsystem.movies.databasefiles.Seat;
 import com.ticket.bookingsystem.movies.databasefiles.Show;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
+import com.ticket.bookingsystem.movies.service.BookingService;
 import com.ticket.bookingsystem.movies.service.ShowDaoService;
 
 @RestController
@@ -22,6 +24,8 @@ public class ShowController {
 
     @Autowired
     private ShowDaoService showService;
+    @Autowired
+    private BookingService bookingService;
 
     @GetMapping(path = "shows")
     public List<Show> listAllShows() {
@@ -48,8 +52,18 @@ public class ShowController {
     }
 
     @GetMapping(path = "shows/showid/{sid}")
-    public List<Show> getShowById(@PathVariable int sid) {
-        return showService.listShowById(sid);
+    public Optional<Show> getShowById(@PathVariable int sid) {
+        try {
+            return showService.findShowById(sid);
+        } catch (MovieNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+
+    }
+
+        @GetMapping("shows/showseats/{showId}")
+    public List<Seat> getSeatsForShow(@PathVariable int showId) {
+        return bookingService.getSeatForShow(showId);
     }
 
 }

@@ -30,6 +30,8 @@ public class ShowDaoService {
         return shows;
     }
 
+    
+
     public boolean addShow(Show show) {
 
         Optional<Movie> movie = movieService.findMovieById(show.getMovieIdShow());
@@ -43,13 +45,6 @@ public class ShowDaoService {
         }
 
     }
-
-    // public List<Show> addShow(Show show) {
-
-    // show.setShowId(showId++);
-    // shows.add(show);
-    // return shows;
-    // }
 
     public List<Show> findShowByMovie(int movieId) {
         List<Show> movieShows = new ArrayList<>();
@@ -66,10 +61,9 @@ public class ShowDaoService {
         shows.removeIf(predicate);
     }
 
-    public List<Show> listShowById(int sid) {
+    public Optional<Show> findShowById(int sid) {
         Predicate<? super Show> prediate = show -> show.getShowId() == sid;
-        List<Show> showById = new ArrayList<>();
-        return showById.stream().filter(prediate).toList();
+        return shows.stream().filter(prediate).findFirst();
     }
 
 }
