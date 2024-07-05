@@ -16,13 +16,13 @@ public class Show {
         this.movieIdShow = movieIdShow;
         this.showStart = showStart;
         this.seats = new ArrayList<>();
-        for (int i = 0; i <= 30; i++) {
+        for (int i = 0; i <= 5; i++) {
             seats.add(new Seat(i));
         }
     }
 
     // Getters
-    public Integer getShowId() {
+    public int getShowId() {
         return showId;
     }
 

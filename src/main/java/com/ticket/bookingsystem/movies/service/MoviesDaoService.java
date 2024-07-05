@@ -3,6 +3,7 @@ package com.ticket.bookingsystem.movies.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import org.springframework.stereotype.Service;
 import com.ticket.bookingsystem.movies.databasefiles.Movie;
@@ -31,6 +32,10 @@ public class MoviesDaoService {
 
     public List<Movie> listAllMovies(){
         return movies;
+    }
+
+    public Optional<Movie> findMovieById(int id){
+        return movies.stream().filter(movie -> movie.getId() == id).findFirst();
     }
 
     public Movie addNewMovie(String movieName, LocalDate date, String city, String theaterName){

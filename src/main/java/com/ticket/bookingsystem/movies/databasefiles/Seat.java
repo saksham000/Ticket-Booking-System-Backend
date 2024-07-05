@@ -4,7 +4,7 @@ public class Seat {
 
     private int seatNo;
     private int showId;
-    private int userID;
+    private int userId;
     private double price;
     private boolean isReserved;
 
@@ -48,9 +48,9 @@ public class Seat {
         this.isReserved = isReserved;
     }
 
-    public void bookSeat(int userID) {
+    public void bookSeat(int userId) {
         this.isReserved = true;
-        this.userID = userID;
+        this.userId = userId;
     }
 
     // toString method
