@@ -1,6 +1,7 @@
 package com.ticket.bookingsystem.movies.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,13 +26,13 @@ public class UserController {
     }
 
     @GetMapping(path = "users/{id}")
-    public User getUserById(@PathVariable int id) {
+    public Optional<User> getUserById(@PathVariable int id) {
         return userService.findUserById(id);
 
     }
 
     @PostMapping(path = "users")
-    public User addNewUser(@RequestBody User user){
+    public User addNewUser(@RequestBody User user) {
         return userService.addNewUser(user);
     }
 

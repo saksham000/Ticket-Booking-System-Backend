@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ticket.bookingsystem.movies.databasefiles.Seat;
 import com.ticket.bookingsystem.movies.databasefiles.Show;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
-import com.ticket.bookingsystem.movies.service.BookingService;
 import com.ticket.bookingsystem.movies.service.ShowDaoService;
 
 @RestController
@@ -24,8 +22,6 @@ public class ShowController {
 
     @Autowired
     private ShowDaoService showService;
-    @Autowired
-    private BookingService bookingService;
 
     @GetMapping(path = "shows")
     public List<Show> listAllShows() {
@@ -60,10 +56,4 @@ public class ShowController {
         }
 
     }
-
-        @GetMapping("shows/showseats/{showId}")
-    public List<Seat> getSeatsForShow(@PathVariable int showId) {
-        return bookingService.getSeatForShow(showId);
-    }
-
 }

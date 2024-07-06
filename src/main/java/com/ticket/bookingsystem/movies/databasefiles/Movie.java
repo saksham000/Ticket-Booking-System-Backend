@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Movie {
 
-
     private int id;
     private String movieName;
     private LocalDate date;

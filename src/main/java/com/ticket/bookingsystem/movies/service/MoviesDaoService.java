@@ -23,22 +23,22 @@ public class MoviesDaoService {
         movies.add(new Movie(movieId++, "Swordssmith ARC", LocalDate.now().plusDays(25), "Amritsar", "DBS"));
     }
 
-    public List<Movie> findMovieByName(String movieName, String city ){
+    public List<Movie> findMovieByName(String movieName, String city) {
         Predicate<Movie> predicate = movie -> movie.getMovieName().equalsIgnoreCase(movieName);
         Predicate<Movie> predicate2 = movie -> movie.getCity().equalsIgnoreCase(city);
         Predicate<Movie> combined = predicate.and(predicate2);
         return movies.stream().filter(combined).toList();
     }
 
-    public List<Movie> listAllMovies(){
+    public List<Movie> listAllMovies() {
         return movies;
     }
 
-    public Optional<Movie> findMovieById(int id){
+    public Optional<Movie> findMovieById(int id) {
         return movies.stream().filter(movie -> movie.getId() == id).findFirst();
     }
 
-    public Movie addNewMovie(String movieName, LocalDate date, String city, String theaterName){
+    public Movie addNewMovie(String movieName, LocalDate date, String city, String theaterName) {
         Movie movie = new Movie(movieId++, movieName, date, city, theaterName);
         movies.add(movie);
         return movie;

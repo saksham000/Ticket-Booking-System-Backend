@@ -4,12 +4,13 @@ public class Seat {
 
     private int seatNo;
     private int showId;
-    private int userId;
     private double price;
     private boolean isReserved;
+    private Integer userId;
 
     // Constructor
     public Seat(int seatNo) {
+        this.userId = null;
         this.seatNo = seatNo;
         this.isReserved = false; // default to not reserved
     }
@@ -19,7 +20,7 @@ public class Seat {
         return seatNo;
     }
 
-    public int getShowId() {
+    public Integer getShowId() {
         return showId;
     }
 
@@ -46,6 +47,10 @@ public class Seat {
 
     public void setReserved(boolean isReserved) {
         this.isReserved = isReserved;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void bookSeat(int userId) {

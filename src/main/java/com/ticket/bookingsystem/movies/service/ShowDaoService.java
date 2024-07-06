@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ticket.bookingsystem.movies.databasefiles.Movie;
+import com.ticket.bookingsystem.movies.databasefiles.Seat;
+// import com.ticket.bookingsystem.movies.databasefiles.Seat;
 import com.ticket.bookingsystem.movies.databasefiles.Show;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
 
@@ -19,18 +21,17 @@ public class ShowDaoService {
 
     @Autowired
     private MoviesDaoService movieService;
+
     private static int showId = 10;
 
-    static {
-
-        shows.add(new Show(showId++, 1, LocalTime.of(12, 30)));
+    public ShowDaoService() {
+        shows.add(new Show(showId++, 1, LocalTime.of(12, 30), 10));
+        shows.add(new Show(showId++, 1, LocalTime.of(12, 30), 2));
     }
 
     public List<Show> listAllShows() {
         return shows;
     }
-
-    
 
     public boolean addShow(Show show) {
 

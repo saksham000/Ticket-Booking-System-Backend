@@ -3,14 +3,13 @@ package com.ticket.bookingsystem.movies.databasefiles;
 public class User {
     private int userId;
     private String username;
-    
 
-     // Constructor
-     public User(String username, int userId) {
+    // Constructor
+    public User(int userId, String username) {
         super();
         this.userId = userId;
         this.username = username;
-        
+
     }
 
     // Getters
@@ -18,7 +17,7 @@ public class User {
         return username;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 

@@ -3,20 +3,23 @@ package com.ticket.bookingsystem.movies.databasefiles;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Show {
     private int showId;
     private int movieIdShow;
     private LocalTime showStart;
+
+    @JsonIgnore
     private List<Seat> seats;
 
     // Constructor
-    public Show(int showId, int movieIdShow, LocalTime showStart) {
+    public Show(int showId, int movieIdShow, LocalTime showStart, int numberOfSeats) {
         this.showId = showId;
         this.movieIdShow = movieIdShow;
         this.showStart = showStart;
         this.seats = new ArrayList<>();
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 1; i <= numberOfSeats; i++) {
             seats.add(new Seat(i));
         }
     }
@@ -53,7 +56,7 @@ public class Show {
 
     public Seat getSeat(int seatNumber) {
         return seats.stream().filter(seats -> seats.getSeatNo() == seatNumber).findFirst()
-        .orElse(null);
+                .orElse(null);
     }
 
     // toString method

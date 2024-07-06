@@ -1,6 +1,7 @@
 package com.ticket.bookingsystem.movies.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
@@ -18,27 +19,27 @@ public class UserDaoService {
 
     static {
 
-        users.add(new User("saksham", countUserId++));
-        users.add(new User("yash", countUserId++));
-        users.add(new User("tripathi", countUserId++));
+        users.add(new User(countUserId++, "saksham"));
+        users.add(new User(countUserId++, "yash"));
+        users.add(new User(countUserId++, "tripathi"));
     }
 
     public List<User> listUsers() {
         return users;
     }
 
-    public User findUserById(int id){
-        return users.stream().filter(user -> user.getUserId() == id).findFirst().get();
+    public Optional<User> findUserById(int id) {
+        return users.stream().filter(user -> user.getUserId() == id).findFirst();
     }
 
-    public User addNewUser(User user){
+    public User addNewUser(User user) {
         user.setUserId(countUserId++);
         users.add(user);
         return user;
     }
 
-    public void deleteUser(int id){
-        Predicate<? super User> predicate = user -> user.getUserId().equals(id);
+    public void deleteUser(int id) {
+        Predicate<? super User> predicate = user -> user.getUserId() == id;
         users.removeIf(predicate);
     }
 }
