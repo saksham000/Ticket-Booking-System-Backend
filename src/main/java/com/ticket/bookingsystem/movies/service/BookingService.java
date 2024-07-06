@@ -39,29 +39,49 @@ public class BookingService {
         }
     }
 
-    // public void setUserIdToSeat(int userid) {
-    // Optional<User> userOptional = userService.findUserById(userid);
-    // if (!userOptional.isPresent()) {
-    // throw new MovieNotFoundException("Show with ID " + userid + " does not
-    // exist.");
-    // }
-    // User user = userOptional.get();
-    // for (Seat seat : user.getUserId()) {
-    // seat.setUserId(userid);
-    // }
+    public Seat bookSeat(int showId, int seatNumber, int userId){
+        Optional<Show> showOptional = showService.findShowById(showId);
+        if (!showOptional.isPresent()) {
+            throw new MovieNotFoundException("Show with ID " + showId + " does not exist.");
+        }
 
-    // }
+        Show show = showOptional.get();
 
-    // public boolean bookSeat(String showId, int seatNumber, String userId) {
-    // Optional<Show> show = showRepository.findShowById(showId);
-    // if (show.isPresent()) {
-    // Seat seat = show.get().getSeat(seatNumber);
-    // if (seat != null && !seat.isBooked()) {
-    // seat.bookSeat(userId);
-    // return true;
-    // }
-    // }
-    // return false;
+        Optional<Seat> seatOptional = show.getSeats().stream().filter(seat -> seat.getSeatNo() == seatNumber).findFirst();
+        if (!seatOptional.isPresent()) {
+            throw new MovieNotFoundException("Seat with ID " + seatNumber + " does not exist.");
+        }
+
+        Seat seat= seatOptional.get();
+        if(seat.isReserved()){
+            throw new MovieNotFoundException("Seat with ID " + seatNumber + " is already reserved.");
+        }
+        seat.bookSeat(userId);
+        return seat;
+    }
+
+    // public Seat bookSeat(int showId, int seatNumber, String userId) {
+    //     Optional<Show> showOptional = showRepository.findShowById(showId);
+    //     if (!showOptional.isPresent()) {
+    //         throw new ShowNotFoundException("Show with ID " + showId + " does not exist.");
+    //     }
+
+    //     Show show = showOptional.get();
+    //     Optional<Seat> seatOptional = show.getSeats().stream()
+    //             .filter(seat -> seat.getSeatNumber() == seatNumber)
+    //             .findFirst();
+
+    //     if (!seatOptional.isPresent()) {
+    //         throw new SeatNotFoundException("Seat with number " + seatNumber + " does not exist in show " + showId);
+    //     }
+
+    //     Seat seat = seatOptional.get();
+    //     if (seat.isBooked()) {
+    //         throw new SeatAlreadyBookedException("Seat " + seatNumber + " is already booked.");
+    //     }
+
+    //     seat.bookSeat(userId);
+    //     return seat;
     // }
 
 }

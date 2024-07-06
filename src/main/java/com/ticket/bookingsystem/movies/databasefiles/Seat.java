@@ -20,12 +20,16 @@ public class Seat {
         return seatNo;
     }
 
-    public Integer getShowId() {
+    public int getShowId() {
         return showId;
     }
 
     public double getPrice() {
         return price;
+    }
+
+    public Integer getuserId(){
+        return userId;
     }
 
     public boolean isReserved() {
@@ -58,12 +62,18 @@ public class Seat {
         this.userId = userId;
     }
 
+    public void cancelBooking() {
+        this.isReserved = false;
+        this.userId = null;
+    }
+
     // toString method
     @Override
     public String toString() {
         return "Seat[" +
                 "seatNo=" + seatNo +
                 ", showId=" + showId +
+                ", userId=" + userId +
                 ", price=" + price +
                 ", isReserved=" + isReserved +
                 ']';

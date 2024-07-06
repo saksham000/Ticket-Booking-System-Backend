@@ -8,10 +8,7 @@ import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ticket.bookingsystem.movies.databasefiles.Movie;
-import com.ticket.bookingsystem.movies.databasefiles.Seat;
-// import com.ticket.bookingsystem.movies.databasefiles.Seat;
 import com.ticket.bookingsystem.movies.databasefiles.Show;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
 
@@ -44,7 +41,6 @@ public class ShowDaoService {
         } else {
             throw new MovieNotFoundException("Movie with ID " + show.getMovieIdShow() + " does not exist.");
         }
-
     }
 
     public List<Show> findShowByMovie(int movieId) {
