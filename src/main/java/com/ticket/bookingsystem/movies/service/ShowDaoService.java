@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ticket.bookingsystem.movies.databasefiles.Movie;
 import com.ticket.bookingsystem.movies.databasefiles.Show;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
+import com.ticket.bookingsystem.movies.exceptions.ShowNotFoundException;
 
 @Service
 public class ShowDaoService {
@@ -43,24 +44,37 @@ public class ShowDaoService {
         }
     }
 
-    public List<Show> findShowByMovie(int movieId) {
+    public List<Show> findShowByMovieId(int movieId) {
+        Optional<Movie> movieOptional = movieService.findMovieById(movieId);
         List<Show> movieShows = new ArrayList<>();
         for (Show show : shows) {
-            if (show.getMovieIdShow() == movieId) {
+            if (movieOptional.isPresent()) {
                 movieShows.add(show);
+            } else {
+                throw new MovieNotFoundException("Movie with ID " + movieId + " does not exist");
             }
         }
         return movieShows;
     }
 
     public void deleteShow(int showid) {
-        Predicate<? super Show> predicate = show -> show.getShowId() == showid;
-        shows.removeIf(predicate);
+
+        if (findShowById(showid).isPresent()) {
+            Predicate<? super Show> predicate = show -> show.getShowId() == showid;
+            shows.removeIf(predicate);
+        } else {
+            throw new ShowNotFoundException("Show with ID " + showid + " does not exist");
+        }
     }
 
     public Optional<Show> findShowById(int sid) {
         Predicate<? super Show> prediate = show -> show.getShowId() == sid;
-        return shows.stream().filter(prediate).findFirst();
+
+        Optional<Show> showOptional = shows.stream().filter(prediate).findFirst();
+        if (!showOptional.isPresent()) {
+            throw new ShowNotFoundException("Show with ID " + sid + " does not exist.");
+        }
+        return showOptional;
     }
 
 }

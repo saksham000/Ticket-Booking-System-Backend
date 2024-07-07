@@ -39,7 +39,12 @@ public class ShowController {
 
     @GetMapping(path = "shows/{mId}")
     public List<Show> getShowsOfMovie(@PathVariable int mId) {
-        return showService.findShowByMovie(mId);
+        try{
+            return showService.findShowByMovieId(mId);
+        }catch(MovieNotFoundException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+        
     }
 
     @DeleteMapping(path = "shows/{sid}")

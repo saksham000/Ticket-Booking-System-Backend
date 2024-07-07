@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ticket.bookingsystem.movies.databasefiles.Seat;
+import com.ticket.bookingsystem.movies.exceptions.SeatAlreadyBookedException;
+import com.ticket.bookingsystem.movies.exceptions.SeatNotFoundException;
+import com.ticket.bookingsystem.movies.exceptions.ShowNotFoundException;
 import com.ticket.bookingsystem.movies.service.BookingService;
 
 @RestController
@@ -26,15 +28,12 @@ public class BookingController {
 
     @GetMapping(path = "{userId}/shows/seats/{showId}/{seatNumber}")
     public Seat bookSeat(@PathVariable int userId, @PathVariable int showId, @PathVariable int seatNumber) {
-       return  bookingService.bookSeat(showId, seatNumber, userId);
 
-        // try {
-        // return showService.bookSeat(showId, seatNumber, userId);
-        // } catch (ShowNotFoundException | SeatNotFoundException |
-        // SeatAlreadyBookedException e) {
-        // throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        // }
-
+        try {
+            return bookingService.bookSeat(showId, seatNumber, userId);
+        } catch (ShowNotFoundException | SeatNotFoundException | SeatAlreadyBookedException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
 }

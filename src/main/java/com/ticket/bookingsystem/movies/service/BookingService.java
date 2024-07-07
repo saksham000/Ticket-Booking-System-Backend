@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ticket.bookingsystem.movies.databasefiles.Seat;
 import com.ticket.bookingsystem.movies.databasefiles.Show;
-import com.ticket.bookingsystem.movies.databasefiles.User;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
 
 @Service
@@ -17,9 +16,6 @@ public class BookingService {
 
     @Autowired
     private ShowDaoService showService;
-
-    @Autowired
-    private UserDaoService userService;
 
     public List<Seat> getSeatForShow(int showId) {
         Optional<Show> show = showServie.findShowById(showId);
@@ -41,6 +37,8 @@ public class BookingService {
 
     public Seat bookSeat(int showId, int seatNumber, int userId){
         Optional<Show> showOptional = showService.findShowById(showId);
+
+
         if (!showOptional.isPresent()) {
             throw new MovieNotFoundException("Show with ID " + showId + " does not exist.");
         }
@@ -48,6 +46,8 @@ public class BookingService {
         Show show = showOptional.get();
 
         Optional<Seat> seatOptional = show.getSeats().stream().filter(seat -> seat.getSeatNo() == seatNumber).findFirst();
+
+
         if (!seatOptional.isPresent()) {
             throw new MovieNotFoundException("Seat with ID " + seatNumber + " does not exist.");
         }
@@ -56,6 +56,7 @@ public class BookingService {
         if(seat.isReserved()){
             throw new MovieNotFoundException("Seat with ID " + seatNumber + " is already reserved.");
         }
+        
         seat.bookSeat(userId);
         return seat;
     }
