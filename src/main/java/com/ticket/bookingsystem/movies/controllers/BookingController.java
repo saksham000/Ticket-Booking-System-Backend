@@ -33,7 +33,6 @@ public class BookingController {
         }catch(ShowNotFoundException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
-        
     }
 
     @GetMapping(path = "{userId}/shows/seats/{showId}/{seatNumber}")
