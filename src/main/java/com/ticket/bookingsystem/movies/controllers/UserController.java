@@ -1,7 +1,6 @@
 package com.ticket.bookingsystem.movies.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ticket.bookingsystem.movies.databasefiles.User;
+import com.ticket.bookingsystem.movies.exceptions.UserNotFoundException;
 import com.ticket.bookingsystem.movies.service.UserDaoService;
 
 @RestController
@@ -26,9 +26,12 @@ public class UserController {
     }
 
     @GetMapping(path = "users/{id}")
-    public Optional<User> getUserById(@PathVariable int id) {
-        return userService.findUserById(id);
-
+    public User getUserById(@PathVariable int id) {
+        try {
+            return userService.findUserById(id);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
     }
 
     @PostMapping(path = "users")
@@ -38,7 +41,12 @@ public class UserController {
 
     @DeleteMapping(path = "users/{id}")
     public void deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
+        try {
+            userService.findUserById(id);
+            userService.deleteUser(id);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
     }
 
 }

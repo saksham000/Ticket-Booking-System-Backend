@@ -4,7 +4,7 @@ public class Seat {
 
     private int seatNo;
     private int showId;
-    private double price;
+    private double price = 280.00;
     private boolean isReserved;
     private Integer userId;
 

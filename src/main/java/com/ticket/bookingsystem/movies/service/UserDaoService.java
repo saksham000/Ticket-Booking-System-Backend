@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 import com.ticket.bookingsystem.movies.databasefiles.User;
+import com.ticket.bookingsystem.movies.exceptions.UserNotFoundException;
 
 @Service
 public class UserDaoService {
@@ -28,8 +29,13 @@ public class UserDaoService {
         return users;
     }
 
-    public Optional<User> findUserById(int id) {
-        return users.stream().filter(user -> user.getUserId() == id).findFirst();
+    public User findUserById(int id) {
+        Optional<User> userOptional = users.stream().filter(user -> user.getUserId() == id).findFirst();
+        if(!userOptional.isPresent()){
+            throw new UserNotFoundException("User with id " + id + " not found");
+        }else{
+            return userOptional.get();
+        }
     }
 
     public User addNewUser(User user) {
