@@ -2,8 +2,14 @@ package com.ticket.bookingsystem.movies.databasefiles;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Movie {
 
+    @Id
     private int id;
     private String movieName;
     private LocalDate date;

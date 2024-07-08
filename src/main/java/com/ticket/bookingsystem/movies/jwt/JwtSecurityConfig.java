@@ -48,7 +48,7 @@ public class JwtSecurityConfig {
         // https://github.com/spring-projects/spring-security/issues/12310
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/authenticate").permitAll()
+                        .requestMatchers("/","/authenticate","/h2-console/**").permitAll()
                         // .requestMatchers(PathRequest.toH2Console()).permitAll() // h2-console is a servlet and NOT
                                                                                 // recommended for a production
                         .requestMatchers(HttpMethod.OPTIONS, "/**")

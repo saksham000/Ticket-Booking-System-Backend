@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 // jakarta. validation valid
 
 public class Show {
-    private int showId;
+    private int id;
     private int movieIdShow;
     private LocalTime showStart;
 
@@ -15,8 +15,8 @@ public class Show {
     private List<Seat> seats;
 
     // Constructor
-    public Show(int showId, int movieIdShow, LocalTime showStart, int numberOfSeats) {
-        this.showId = showId;
+    public Show(int id, int movieIdShow, LocalTime showStart, int numberOfSeats) {
+        this.id = id;
         this.movieIdShow = movieIdShow;
         this.showStart = showStart;
         this.seats = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Show {
 
     // Getters
     public int getShowId() {
-        return showId;
+        return id;
     }
 
     public int getMovieIdShow() {
@@ -43,8 +43,8 @@ public class Show {
     }
 
     // Setters
-    public void setShowId(int showId) {
-        this.showId = showId;
+    public void setShowId(int id) {
+        this.id = id;
     }
 
     public void setMovieIdShow(int movieIdShow) {
@@ -64,7 +64,7 @@ public class Show {
     @Override
     public String toString() {
         return "Show[" +
-                "showId=" + showId +
+                "showId=" + id +
                 ", showStart=" + showStart +
                 ", movieIdShow=" + movieIdShow +
                 ']';

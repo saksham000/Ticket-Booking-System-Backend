@@ -1,6 +1,17 @@
 package com.ticket.bookingsystem.movies.databasefiles;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 public class User {
+
+    public User() {
+
+    }
+
+    // @GeneratedValue
+
     private int userId;
     private String username;
 
