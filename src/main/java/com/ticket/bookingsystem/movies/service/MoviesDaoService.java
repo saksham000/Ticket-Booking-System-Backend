@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import org.springframework.stereotype.Service;
 import com.ticket.bookingsystem.movies.databasefiles.Movie;
 import com.ticket.bookingsystem.movies.exceptions.MovieNotFoundException;
@@ -36,12 +35,6 @@ public class MoviesDaoService {
     }
 
     public Optional<Movie> findMovieByNameAndCity(String movieName, String city) {
-        // Predicate<Movie> predicate = movie ->
-        // movie.getMovieName().equalsIgnoreCase(movieName);
-        // Predicate<Movie> predicate2 = movie ->
-        // movie.getCity().equalsIgnoreCase(city);
-        // Predicate<Movie> combined = predicate.and(predicate2);
-        // return movies.stream().filter(combined).findFirst();
         return movies.stream().filter(movie -> movie.getMovieName().equalsIgnoreCase(movieName) && movie.getCity()
                 .equalsIgnoreCase(city)).findFirst();
     }
