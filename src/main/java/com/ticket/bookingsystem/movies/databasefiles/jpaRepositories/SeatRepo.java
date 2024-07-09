@@ -1,4 +1,4 @@
-package com.ticket.bookingsystem.movies.databasefiles.jpaRepositoryes;
+package com.ticket.bookingsystem.movies.databasefiles.jpaRepositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

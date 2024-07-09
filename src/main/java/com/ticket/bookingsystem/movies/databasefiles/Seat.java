@@ -20,14 +20,12 @@ public class Seat {
     @ManyToOne
     private Show show;
 
-    // Constructor
     public Seat(int seatNo) {
         this.userId = null;
         this.seatNo = seatNo;
         this.isReserved = false; // default to not reserved
     }
 
-    // Getters
     public int getSeatNo() {
         return seatNo;
     }
@@ -48,7 +46,8 @@ public class Seat {
         return isReserved;
     }
 
-    // Setters
+
+
     public void setSeatNo(int seatNo) {
         this.seatNo = seatNo;
     }
@@ -79,7 +78,6 @@ public class Seat {
         this.userId = null;
     }
 
-    // toString method
     @Override
     public String toString() {
         return "Seat[" +

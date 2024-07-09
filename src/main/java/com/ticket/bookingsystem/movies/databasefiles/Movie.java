@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -12,7 +14,8 @@ import jakarta.persistence.OneToMany;
 public class Movie {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String movieName;
     private LocalDate date;
     private String city;
@@ -20,6 +23,10 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie")
     private List<Show> shows;
+
+    public Movie(){
+        
+    }
 
     // Constructor
     public Movie(int id, String movieName, LocalDate date, String city, String theaterName) {
@@ -53,7 +60,7 @@ public class Movie {
     }
 
     // Setters
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
