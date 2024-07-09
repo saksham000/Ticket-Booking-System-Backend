@@ -2,9 +2,11 @@ package com.ticket.bookingsystem.movies.databasefiles;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.EmbeddedId;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Movie {
@@ -15,6 +17,9 @@ public class Movie {
     private LocalDate date;
     private String city;
     private String theaterName;
+
+    @OneToMany(mappedBy = "movie")
+    private List<Show> shows;
 
     // Constructor
     public Movie(int id, String movieName, LocalDate date, String city, String theaterName) {

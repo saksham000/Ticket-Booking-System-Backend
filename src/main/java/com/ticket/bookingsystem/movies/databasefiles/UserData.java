@@ -1,22 +1,32 @@
 package com.ticket.bookingsystem.movies.databasefiles;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
-public class User {
+@Entity
+public class UserData {
 
-    public User() {
+    public UserData() {
 
     }
 
-    // @GeneratedValue
-
+    @GeneratedValue
+    @Id
     private int userId;
     private String username;
 
-    // Constructor
-    public User(int userId, String username) {
+
+
+     @OneToMany(mappedBy = "userId")
+    private List<Seat> seats;
+
+
+
+    public UserData(int userId, String username) {
         super();
         this.userId = userId;
         this.username = username;

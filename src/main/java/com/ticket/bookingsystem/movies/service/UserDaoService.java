@@ -8,29 +8,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-import com.ticket.bookingsystem.movies.databasefiles.User;
+import com.ticket.bookingsystem.movies.databasefiles.UserData;
 import com.ticket.bookingsystem.movies.exceptions.UserNotFoundException;
 
 @Service
 public class UserDaoService {
 
-    private static List<User> users = new ArrayList<>();
+    private static List<UserData> users = new ArrayList<>();
 
     private static int countUserId = 0;
 
     static {
 
-        users.add(new User(countUserId++, "saksham"));
-        users.add(new User(countUserId++, "yash"));
-        users.add(new User(countUserId++, "tripathi"));
+        users.add(new UserData(countUserId++, "saksham"));
+        users.add(new UserData(countUserId++, "yash"));
+        users.add(new UserData(countUserId++, "tripathi"));
     }
 
-    public List<User> listUsers() {
+    public List<UserData> listUsers() {
         return users;
     }
 
-    public User findUserById(int id) {
-        Optional<User> userOptional = users.stream().filter(user -> user.getUserId() == id).findFirst();
+    public UserData findUserById(int id) {
+        Optional<UserData> userOptional = users.stream().filter(user -> user.getUserId() == id).findFirst();
         if(!userOptional.isPresent()){
             throw new UserNotFoundException("User with id " + id + " not found");
         }else{
@@ -38,14 +38,14 @@ public class UserDaoService {
         }
     }
 
-    public User addNewUser(User user) {
+    public UserData addNewUser(UserData user) {
         user.setUserId(countUserId++);
         users.add(user);
         return user;
     }
 
     public void deleteUser(int id) {
-        Predicate<? super User> predicate = user -> user.getUserId() == id;
+        Predicate<? super UserData> predicate = user -> user.getUserId() == id;
         users.removeIf(predicate);
     }
 }

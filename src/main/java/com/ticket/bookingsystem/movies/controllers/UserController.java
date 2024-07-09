@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ticket.bookingsystem.movies.databasefiles.User;
+import com.ticket.bookingsystem.movies.databasefiles.UserData;
 import com.ticket.bookingsystem.movies.exceptions.UserNotFoundException;
 import com.ticket.bookingsystem.movies.service.UserDaoService;
 
@@ -21,12 +21,12 @@ public class UserController {
     UserDaoService userService;
 
     @GetMapping(path = "users")
-    public List<User> listAllUsers() {
+    public List<UserData> listAllUsers() {
         return userService.listUsers();
     }
 
     @GetMapping(path = "users/{id}")
-    public User getUserById(@PathVariable int id) {
+    public UserData getUserById(@PathVariable int id) {
         try {
             return userService.findUserById(id);
         } catch (UserNotFoundException e) {
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping(path = "users")
-    public User addNewUser(@RequestBody User user) {
+    public UserData addNewUser(@RequestBody UserData user) {
         return userService.addNewUser(user);
     }
 

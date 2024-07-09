@@ -6,14 +6,28 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 // jakarta. validation valid
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Show {
+
+    @Id
     private int id;
     private int movieIdShow;
     private LocalTime showStart;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "show")
     private List<Seat> seats;
 
+
+    @ManyToOne
+    private Movie movie;
+
+    
     // Constructor
     public Show(int id, int movieIdShow, LocalTime showStart, int numberOfSeats) {
         this.id = id;

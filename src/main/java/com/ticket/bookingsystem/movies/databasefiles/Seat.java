@@ -1,12 +1,24 @@
 package com.ticket.bookingsystem.movies.databasefiles;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Seat {
 
+    @Id
     private int seatNo;
+
+    @Column(name = "showsid")
     private int showId;
     private double price = 280;
     private boolean isReserved;
     private Integer userId;
+
+    @ManyToOne
+    private Show show;
 
     // Constructor
     public Seat(int seatNo) {
@@ -28,7 +40,7 @@ public class Seat {
         return price;
     }
 
-    public Integer getuserId(){
+    public Integer getuserId() {
         return userId;
     }
 
