@@ -7,7 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 // jakarta. validation valid
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -15,6 +18,7 @@ import jakarta.persistence.OneToMany;
 public class Show {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int movieIdShow;
     private LocalTime showStart;
@@ -23,11 +27,21 @@ public class Show {
     @OneToMany(mappedBy = "show")
     private List<Seat> seats;
 
-
     @ManyToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public Show() {
+    }
+
     // Constructor
     public Show(int id, int movieIdShow, LocalTime showStart, int numberOfSeats) {
         this.id = id;

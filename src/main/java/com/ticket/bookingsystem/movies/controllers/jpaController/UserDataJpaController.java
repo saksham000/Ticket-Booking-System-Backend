@@ -2,7 +2,6 @@ package com.ticket.bookingsystem.movies.controllers.jpaController;
 
 import java.util.List;
 
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +16,7 @@ import com.ticket.bookingsystem.movies.databasefiles.UserData;
 import com.ticket.bookingsystem.movies.databasefiles.jpaRepositories.UserDataRepo;
 
 @RestController
-public class UserController {
+public class UserDataJpaController {
 
     @Autowired
     UserDataRepo userRepoService;
