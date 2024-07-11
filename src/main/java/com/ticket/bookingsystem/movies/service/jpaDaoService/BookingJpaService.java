@@ -1,4 +1,4 @@
-package com.ticket.bookingsystem.movies.controllers.jpaController.jpaDaoService;
+package com.ticket.bookingsystem.movies.service.jpaDaoService;
 
 import java.util.List;
 import java.util.Optional;

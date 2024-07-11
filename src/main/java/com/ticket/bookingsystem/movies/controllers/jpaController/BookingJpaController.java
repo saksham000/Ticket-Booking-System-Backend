@@ -15,7 +15,7 @@ import com.ticket.bookingsystem.movies.exceptions.SeatAlreadyBookedException;
 import com.ticket.bookingsystem.movies.exceptions.SeatNotFoundException;
 import com.ticket.bookingsystem.movies.exceptions.ShowNotFoundException;
 import com.ticket.bookingsystem.movies.exceptions.UserNotFoundException;
-import com.ticket.bookingsystem.movies.controllers.jpaController.jpaDaoService.BookingJpaService;
+import com.ticket.bookingsystem.movies.service.jpaDaoService.BookingJpaService;
 
 @RestController
 public class BookingJpaController {
