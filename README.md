@@ -1,1 +1,1 @@
-This is a FullStack TicketBooking App's Backend in which you can book almost any ticket in one place. Right now developing this web app for movie tickets booking only. Right now this project is in under development.
+This is a FullStack TicketBooking App's Backend in which you can book almost any ticket in one place. Right now developing this web app for movie tickets booking only. Right now this project is in under development the backend is almost done with database.
