@@ -3,14 +3,14 @@ package com.ticket.bookingsystem.movies.databasefiles;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-// jakarta. validation valid
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -19,17 +19,40 @@ public class Show {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int showId;
     private int movieIdShow;
     private LocalTime showStart;
+    private int numberOfSeats;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "show")
-    private List<Seat> seats;
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seat> seats = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JsonIgnore
     private Movie movie;
+
+    public Show(int movieIdShow, LocalTime showStart, int numberOfSeats) {
+        this.movieIdShow = movieIdShow;
+        this.showStart = showStart;
+        this.seats = new ArrayList<>();
+        for (int i = 1; i <= numberOfSeats; i++) {
+            Seat seat = new Seat(i);
+            seat.setShow(this);
+            seats.add(seat);
+        }
+    }
+
+    public Show() {
+    }
+
+    public int getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
 
     public Movie getMovie() {
         return movie;
@@ -39,23 +62,11 @@ public class Show {
         this.movie = movie;
     }
 
-    public Show() {
-    }
-
     // Constructor
-    public Show(int id, int movieIdShow, LocalTime showStart, int numberOfSeats) {
-        this.id = id;
-        this.movieIdShow = movieIdShow;
-        this.showStart = showStart;
-        this.seats = new ArrayList<>();
-        for (int i = 1; i <= numberOfSeats; i++) {
-            seats.add(new Seat(i));
-        }
-    }
 
     // Getters
     public int getShowId() {
-        return id;
+        return showId;
     }
 
     public int getMovieIdShow() {
@@ -70,9 +81,8 @@ public class Show {
         return seats;
     }
 
-    // Setters
-    public void setShowId(int id) {
-        this.id = id;
+    public void setShowId(int showId) {
+        this.showId = showId;
     }
 
     public void setMovieIdShow(int movieIdShow) {
@@ -81,6 +91,13 @@ public class Show {
 
     public void setShowStart(LocalTime showStart) {
         this.showStart = showStart;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+        for (Seat seat : seats) {
+            seat.setShow(this);
+        }
     }
 
     public Seat getSeat(int seatNumber) {
@@ -92,7 +109,7 @@ public class Show {
     @Override
     public String toString() {
         return "Show[" +
-                "showId=" + id +
+                "showId=" + showId +
                 ", showStart=" + showStart +
                 ", movieIdShow=" + movieIdShow +
                 ']';

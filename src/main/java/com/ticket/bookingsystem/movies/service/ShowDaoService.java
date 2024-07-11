@@ -1,6 +1,5 @@
 package com.ticket.bookingsystem.movies.service;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,10 +21,10 @@ public class ShowDaoService {
 
     private static int showId = 10;
 
-    public ShowDaoService() {
-        shows.add(new Show(showId++, 1, LocalTime.of(12, 30), 10));
-        shows.add(new Show(showId++, 1, LocalTime.of(12, 30), 2));
-    }
+    // public ShowDaoService() {
+    //     shows.add(new Show(showId++, 1, LocalTime.of(12, 30), 10));
+    //     shows.add(new Show(showId++, 1, LocalTime.of(12, 30), 2));
+    // }
 
     public List<Show> listAllShows() {
         return shows;

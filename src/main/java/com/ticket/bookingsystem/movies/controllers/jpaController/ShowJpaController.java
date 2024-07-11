@@ -32,9 +32,11 @@ public class ShowJpaController {
 
     @PostMapping(path = "shows")
     public void addShowToSpecificMovie(@RequestBody Show show) {
-        ;
+
         if (movieRepoService.findById(show.getMovieIdShow()).isPresent()) {
-            showRepoService.save(show);
+            Show shows = new Show(show.getMovieIdShow(), show.getShowStart(), show.getNumberOfSeats());
+            shows.setNumberOfSeats(show.getNumberOfSeats());
+            showRepoService.save(shows);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Movie with id " + show.getMovieIdShow() + " is not present");

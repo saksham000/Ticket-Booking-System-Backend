@@ -3,6 +3,7 @@ package com.ticket.bookingsystem.movies.controllers.jpaController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,6 @@ public class MoviesJpaController {
 
         if (!movieRepoService.findByMovieNameAndCity(movieName, city).isEmpty()) {
             return movieRepoService.findByMovieNameAndCity(movieName, city);
-
         } else {
             throw new MovieNotFoundException("Movie Name " + movieName + " And city name " + city + " Not Found");
         }

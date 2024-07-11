@@ -24,16 +24,16 @@ public class BookingService {
 
     }
 
-    public void setShowIdToSeat(int showid) {
-        Optional<Show> showOptional = showService.findShowById(showid);
-        if (!showOptional.isPresent()) {
-            throw new MovieNotFoundException("Show with ID " + showid + " does not exist.");
-        }
-        Show show = showOptional.get();
-        for (Seat seat : show.getSeats()) {
-            seat.setShowId(showid);
-        }
-    }
+    // public void setShowIdToSeat(int showid) {
+    //     Optional<Show> showOptional = showService.findShowById(showid);
+    //     if (!showOptional.isPresent()) {
+    //         throw new MovieNotFoundException("Show with ID " + showid + " does not exist.");
+    //     }
+    //     Show show = showOptional.get();
+    //     for (Seat seat : show.getSeats()) {
+    //         seat.setShowId(showid);
+    //     }
+    // }
 
     public Seat bookSeat(int showId, int seatNumber, int userId){
         Optional<Show> showOptional = showService.findShowById(showId);
