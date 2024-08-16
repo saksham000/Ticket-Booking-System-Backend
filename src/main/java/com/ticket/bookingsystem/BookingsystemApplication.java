@@ -13,7 +13,7 @@ public class BookingsystemApplication {
 		SpringApplication.run(BookingsystemApplication.class, args);
 	}
 
-		@Bean
+	@Bean
 	public WebMvcConfigurer corsConfigurer(){
 		return new WebMvcConfigurer(){
 			public void addCorsMappings(CorsRegistry registry){

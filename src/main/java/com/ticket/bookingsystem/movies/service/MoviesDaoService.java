@@ -25,10 +25,10 @@ public class MoviesDaoService {
 
     public Movie findMovie(String movieName, String city) {
 
-        Optional<Movie> movieOptional = movies.stream().filter(movie -> movie.getMovieName().equalsIgnoreCase(movieName) && movie.getCity()
-        .equalsIgnoreCase(city)).findFirst();
-
-
+        Optional<Movie> movieOptional = movies.stream()
+                .filter(movie -> movie.getMovieName().equalsIgnoreCase(movieName) && movie.getCity()
+                        .equalsIgnoreCase(city))
+                .findFirst();
 
         if (!movieOptional.isPresent()) {
             throw new MovieNotFoundException("Movie name " + movieName + " is Not found");
