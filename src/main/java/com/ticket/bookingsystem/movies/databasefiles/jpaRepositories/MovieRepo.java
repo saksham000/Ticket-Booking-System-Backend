@@ -12,4 +12,7 @@ public interface MovieRepo extends JpaRepository<Movie, Integer> {
 
     @Query("SELECT m FROM Movie m WHERE m.movieName = :movieName AND m.city = :city")
     List<Movie> findByMovieNameAndCity(@Param("movieName") String movieName, @Param("city") String city);
+
+    @Query("SELECT m FROM Movie m WHERE m.movieName = :movieName")
+    List<Movie> findByMovieName(@Param("movieName") String movieName);
 }
